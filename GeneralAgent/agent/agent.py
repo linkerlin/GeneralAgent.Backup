@@ -94,10 +94,10 @@ class Agent():
         self.role_interpreter = RoleInterpreter(role=role, self_call=self_call)
         self.python_interpreter = PythonInterpreter(self, serialize_path=self._python_path)
         self.python_interpreter.function_tools = functions
-        self.model = model or os.environ.get('DEFAULT_LLM_MODEL', 'gpt-4o')
+        self.model = model or os.environ.get('DEFAULT_LLM_MODEL', 'qwen-turbo')
         self.token_limit = token_limit or skills.get_llm_token_limit(self.model)
-        self.api_key = api_key
-        self.base_url = base_url
+        self.api_key = api_key or os.environ.get('DEFAULT_LLM_API_KEY', 'sk-')
+        self.base_url = base_url or os.environ.get('DEFAULT_LLM_BASE_URL', 'https://dashscope.aliyuncs.com/compatible-mode/v1')
         # self.temperature = temperature
         # self.frequency_penalty = frequency_penalty
         self.llm_args = args
